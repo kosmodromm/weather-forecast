@@ -23,3 +23,5 @@ You will also see any lint errors in the console.
     - include hourly & 10-day weather forecast
     - get city from url, ex: {...}/in/Milan
     - input with possibility to change city
+  
+- error handling
