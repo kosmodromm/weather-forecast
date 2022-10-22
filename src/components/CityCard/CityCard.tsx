@@ -12,8 +12,7 @@ const CityCard = ({ weatherData }: IProps) => {
         <div className="flex justify-center flex-col p-3">
           <a href="#!">
             <img className="rounded-t-lg m-auto" src={weatherData.iconNow}
-                 alt=""
-                 /*todo add alt text from json https://www.weatherapi.com/docs/conditions.json*/
+                 alt={weatherData.text}
             />
           </a>
           <div className="flex justify-center flex-row">
@@ -27,20 +26,20 @@ const CityCard = ({ weatherData }: IProps) => {
           </div>
         </div>
         <div className="m-3">
-          <div className="flex justify-center items-center flex-row border-t text-base">
-            <p className="p-4 flex-grow">{weatherData.weatherForecast[1].date}</p>
+          <div className="flex justify-center items-center flex-row border-t text-base p-1">
+            <p className="p-5 flex-grow">{weatherData.weatherForecast[1].date}</p>
             <p className="p-2">{weatherData.weatherForecast[1].temp}</p>
-            <img className="rounded-t-lg m-auto" src={weatherData.weatherForecast[1].iconUrl} alt="" />
+            <img className="rounded-t-lg m-auto pl-2" src={weatherData.weatherForecast[1].iconUrl} alt={weatherData.weatherForecast[1].text} />
           </div>
-          <div className="flex justify-center items-center flex-row border-t text-base">
-            <p className="p-4 flex-grow">{weatherData.weatherForecast[2].date}</p>
+          <div className="flex justify-center items-center flex-row border-t text-base p-1">
+            <p className="p-5 flex-grow">{weatherData.weatherForecast[2].date}</p>
             <p className="p-2">{weatherData.weatherForecast[2].temp}</p>
-            <img className="rounded-t-lg m-auto" src={weatherData.weatherForecast[2].iconUrl} alt="" />
+            <img className="rounded-t-lg m-auto pl-2" src={weatherData.weatherForecast[2].iconUrl} alt={weatherData.weatherForecast[2].text} />
           </div>
-          <div className="flex justify-center items-center flex-row border-t text-base">
-            <p className="p-4 flex-grow">{weatherData.weatherForecast[3].date}</p>
+          <div className="flex justify-center items-center flex-row border-t text-base p-1">
+            <p className="p-5 flex-grow">{weatherData.weatherForecast[3].date}</p>
             <p className="p-2">{weatherData.weatherForecast[3].temp}</p>
-            <img className="rounded-t-lg m-auto" src={weatherData.weatherForecast[3].iconUrl} alt="" />
+            <img className="rounded-t-lg m-auto pl-2" src={weatherData.weatherForecast[3].iconUrl} alt={weatherData.weatherForecast[3].text} />
           </div>
         </div>
       </div>

@@ -21,7 +21,8 @@ export interface IForecastDay {
     avgtemp_c: number,
     totalsnow_cm: number,
     condition: {
-      icon: string
+      icon: string,
+      text: string
     },
     astro: {},
     hour: IForecastHour[]
@@ -42,7 +43,8 @@ export interface IWeatherDTO {
   current: {
     temp_c: number,
     condition: {
-      icon: string
+      icon: string,
+      text: string
     },
     uv: number
   },
@@ -53,6 +55,7 @@ export interface IWeatherDTO {
 
 export interface ISingleDayWeather {
   temp: string,
+  text: string,
   iconUrl: string,
   date: string
 }
@@ -61,11 +64,12 @@ export interface IWeather {
   city: string,
   tempNow: string,
   iconNow: string,
+  text: string,
   weatherForecast: ISingleDayWeather[]
 }
 
 //TRIAL on this API Ends on 03/Nov/2022
-const API_KEY = '89f5cbfe7d4748bfbdc101556222010';
+const API_KEY = "89f5cbfe7d4748bfbdc101556222010";
 const DAYS = 10;
 const API_URL = new URL('http://api.weatherapi.com/v1/forecast.json?');
 
@@ -98,29 +102,36 @@ function fromDTO(data: IWeatherDTO): IWeather {
     city: data.location.name,
     tempNow: `${data.current.temp_c}°`,
     iconNow: `https:${data.current.condition.icon}`,
+    text: data.current.condition.text,
     weatherForecast:
       [
         {
           date: getFormattedDate(data.forecast.forecastday[0].date),
           temp: `${data.forecast.forecastday[0].day.avgtemp_c}°`,
+          text: data.forecast.forecastday[0].day.condition.text,
           iconUrl: `https:${data.forecast.forecastday[0].day.condition.icon}`
         },
         {
           date: getFormattedDate(data.forecast.forecastday[1].date),
           temp: `${data.forecast.forecastday[1].day.avgtemp_c}°`,
+          text: data.forecast.forecastday[1].day.condition.text,
           iconUrl: `https:${data.forecast.forecastday[1].day.condition.icon}`
         },
         {
           date: getFormattedDate(data.forecast.forecastday[2].date),
           temp: `${data.forecast.forecastday[2].day.avgtemp_c}°`,
+          text: data.forecast.forecastday[2].day.condition.text,
           iconUrl: `https:${data.forecast.forecastday[2].day.condition.icon}`
         },
         {
           date: getFormattedDate(data.forecast.forecastday[3].date),
           temp: `${data.forecast.forecastday[3].day.avgtemp_c}°`,
+          text: data.forecast.forecastday[3].day.condition.text,
           iconUrl: `https:${data.forecast.forecastday[3].day.condition.icon}`
         }
       ]
   };
+
+  console.log(data, weatherData);
   return weatherData;
 }
