@@ -1,20 +1,37 @@
 import { IWeather } from '../../api/weatherApi';
+import { useCallback } from 'react';
 
 interface IProps {
-  weatherData: IWeather
+  weatherData: IWeather,
+  linkTo?: (city: string) => void
 }
 
-const CityCard = ({ weatherData }: IProps) => {
+const CityCard = ({ weatherData, linkTo }: IProps) => {
+  const handleClick = useCallback(() => {
+    if (linkTo) {
+      linkTo(weatherData.city);
+    }
+  }, [linkTo, weatherData.city]);
+
   return (
-    <div className="flex justify-center ">
-      <div className="rounded-lg shadow-lg bg-transparent backdrop-blur-sm max-w-sm">
-        {/*todo make navigation to city page with router*/}
+    <div className="flex justify-center">
+      <div className="rounded-lg
+                      shadow-lg
+                      bg-transparent
+                      backdrop-blur-sm
+                      max-w-sm
+                      min-w-[320px]
+                      cursor-pointer
+                      hover:bg-[#FFF8E6]
+                      hover:rounded-lg
+                      hover:shadow-2xl
+                      transition-all"
+           onClick={handleClick}
+      >
         <div className="flex justify-center flex-col p-3">
-          <a href="#!">
-            <img className="rounded-t-lg m-auto" src={weatherData.iconNow}
+            <img className="rounded-t-lg m-auto pb-5" src={weatherData.iconNow}
                  alt={weatherData.text}
             />
-          </a>
           <div className="flex justify-center flex-row">
             <div className="border-r p-3 text-4xl">
               {weatherData.tempNow}

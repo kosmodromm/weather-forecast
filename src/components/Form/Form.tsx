@@ -6,24 +6,23 @@ interface IProps {
   handleSearch: (city: string) => Promise<void>
 }
 
-const Form = ({ handleSearch }: IProps) => {
+const Form: React.FC<IProps> = ({ handleSearch }) => {
   const [city, setCity] = useState('');
 
   const navigate = useNavigate();
 
-  const onCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onCityChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setCity(e.target.value);
   };
 
-  const onSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSearch = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     navigate(`${Path.City}/${city}`)
     handleSearch(city);
   };
 
   return (
-    <>
-      <form className="flex items-center pb-5" onSubmit={onSearch}>
+      <form className="flex items-center pb-5 min-w-[320px]" onSubmit={onSearch}>
         <label htmlFor="simple-search" className="sr-only">Search</label>
         <div className="relative w-full">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -50,7 +49,6 @@ const Form = ({ handleSearch }: IProps) => {
           <span className="sr-only">Enter city</span>
         </button>
       </form>
-    </>
   );
 };
 
