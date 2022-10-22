@@ -31,7 +31,7 @@ const Main = () => {
     <div className="m-auto antialiased font-sans font-serif font-mono text-center">
       {
         weatherData &&
-        <main className="bg-[#faf6ec] min-h-screen flex flex-col items-center justify-center text-white text-2xl">
+        <main className="bg-paper min-h-screen flex flex-col items-center justify-center text-white text-2xl">
           <Icon name="logo" className="width-50 height-50 fill-#487EFF absolute top-1.5 left-auto" />
           <CityCard weatherData={weatherData} />
         </main>
