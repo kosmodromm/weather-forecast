@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Path from '../../constants/Path';
 
 interface IProps {
-  city: string;
-  setCity: (city: string) => void;
-  handleSearch: () => void
-
+  handleSearch: (city: string) => Promise<void>
 }
 
-const Form = ({ city, setCity, handleSearch }: IProps) => {
+const Form = ({ handleSearch }: IProps) => {
+  const [city, setCity] = useState('');
+
+  const navigate = useNavigate();
+
   const onCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
   };
 
-  const onSearch = async (e: any) => {
-    e.preventDefault();
-    handleSearch();
+  const onSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    navigate(`${Path.City}/${city}`)
+    handleSearch(city);
   };
 
   return (
     <>
-      <form className="flex items-center" onSubmit={onSearch}>
+      <form className="flex items-center pb-5" onSubmit={onSearch}>
         <label htmlFor="simple-search" className="sr-only">Search</label>
         <div className="relative w-full">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

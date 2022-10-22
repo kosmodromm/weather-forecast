@@ -32,7 +32,7 @@ const Main = () => {
       {
         weatherData &&
         <main className="bg-paper min-h-screen flex flex-col items-center justify-center text-white text-2xl">
-          <Icon name="logo" className="width-50 height-50 fill-#487EFF absolute top-1.5 left-auto" />
+          <Icon name="logo" className="width-50 height-50 fill-#487EFF pb-5" />
           <CityCard weatherData={weatherData} />
         </main>
       }
