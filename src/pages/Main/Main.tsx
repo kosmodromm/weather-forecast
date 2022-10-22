@@ -34,6 +34,7 @@ const Main: React.FC = () => {
   }, []);
 
   const changeCity = (city: string): void => {
+    localStorage.setItem('defaultCity', city);
     navigation(`${Path.City}/${city}`);
   };
 
