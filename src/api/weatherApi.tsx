@@ -132,6 +132,5 @@ function fromDTO(data: IWeatherDTO): IWeather {
       ]
   };
 
-  console.log(data, weatherData);
   return weatherData;
 }
