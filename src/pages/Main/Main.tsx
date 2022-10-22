@@ -5,6 +5,8 @@ import { getDefaultCity } from '../../utils/getDefaultCity';
 import CityCard from '../../components/CityCard/CityCard';
 import { Link, useNavigate } from 'react-router-dom';
 import Path from '../../constants/Path';
+import StyledButton from '../../components/StyledButton/StyledButton';
+import Loader from '../../components/Loader/Loader';
 
 const Main: React.FC = () => {
   const [weatherData, setWeatherData] = useState<IWeather>();
@@ -37,15 +39,23 @@ const Main: React.FC = () => {
 
   return (
     <div className="m-auto antialiased font-sans font-serif font-mono text-center">
-      {
-        weatherData &&
-        <main className="bg-paper min-h-screen flex flex-col items-center justify-center text-white text-2xl">
-          <Link to={Path.Main}>
-            <Icon name="logo" className="width-50 height-50 fill-#FF8F40 pb-5" />
-          </Link>
-          <CityCard weatherData={weatherData} linkTo={changeCity} />
-        </main>
-      }
+      <main className="bg-paper min-h-screen flex flex-col items-center justify-center text-white text-2xl">
+        <Link to={Path.Main}>
+          <Icon name="logo" className="width-50 height-50 fill-[#FF8F40] pb-5" />
+        </Link>
+        {
+          weatherData
+            ? <>
+              <CityCard weatherData={weatherData} linkTo={changeCity} />
+              <div className="flex flex-col gap-2 mt-5">
+                <StyledButton text="Minsk" onClick={changeCity} />
+                <StyledButton text="Moscow" onClick={changeCity} />
+                <StyledButton text="Bratislava" onClick={changeCity} />
+              </div>
+            </>
+            : <Loader />
+        }
+      </main>
     </div>
   );
 };
