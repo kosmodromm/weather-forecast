@@ -25,7 +25,7 @@ const Main = () => {
         localStorage.setItem('defaultCity', weatherData.city);
       }
     }
-  }, [weatherData]);
+  }, []);
 
   return (
     <div className="m-auto antialiased font-sans font-serif font-mono text-center">
