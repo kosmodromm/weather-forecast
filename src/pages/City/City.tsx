@@ -9,6 +9,7 @@ import Path from '../../constants/Path';
 import Loader from '../../components/Loader/Loader';
 
 const City: React.FC = () => {
+  const DAYS = 10;
   const [weatherData, setWeatherData] = useState<IWeather>();
 
   const { city } = useParams();
@@ -42,7 +43,7 @@ const City: React.FC = () => {
         {
           weatherData
             ? <>
-              <CityCard weatherData={weatherData} linkTo={handleSearch} />
+              <CityCard weatherData={weatherData} linkTo={handleSearch} days={DAYS} hourly/>
             </>
             : <Loader />
         }

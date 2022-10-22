@@ -1,4 +1,5 @@
 import { getFormattedDate } from '../utils/getFormattedDate';
+import getFormattedHours from '../utils/getFormattedHours';
 
 export interface ICoords {
   latitude: number,
@@ -9,6 +10,7 @@ export interface IForecastHour {
   time: string,
   temp_c: number,
   condition: {
+    text: string,
     icon: string
   }
 }
@@ -23,10 +25,10 @@ export interface IForecastDay {
     condition: {
       icon: string,
       text: string
-    },
-    astro: {},
-    hour: IForecastHour[]
-  }
+    }
+  },
+  astro: {},
+  hour: IForecastHour[]
 }
 
 export interface IWeatherDTO {
@@ -53,11 +55,19 @@ export interface IWeatherDTO {
   }
 }
 
+export interface IHourWeather {
+  time: string,
+  temp: string,
+  text: string,
+  icon: string
+}
+
 export interface ISingleDayWeather {
   temp: string,
   text: string,
   iconUrl: string,
-  date: string
+  date: string,
+  hour: IHourWeather[]
 }
 
 export interface IWeather {
@@ -103,33 +113,22 @@ function fromDTO(data: IWeatherDTO): IWeather {
     tempNow: `${data.current.temp_c}°`,
     iconNow: `https:${data.current.condition.icon}`,
     text: data.current.condition.text,
-    weatherForecast:
-      [
-        {
-          date: getFormattedDate(data.forecast.forecastday[0].date),
-          temp: `${data.forecast.forecastday[0].day.avgtemp_c}°`,
-          text: data.forecast.forecastday[0].day.condition.text,
-          iconUrl: `https:${data.forecast.forecastday[0].day.condition.icon}`
-        },
-        {
-          date: getFormattedDate(data.forecast.forecastday[1].date),
-          temp: `${data.forecast.forecastday[1].day.avgtemp_c}°`,
-          text: data.forecast.forecastday[1].day.condition.text,
-          iconUrl: `https:${data.forecast.forecastday[1].day.condition.icon}`
-        },
-        {
-          date: getFormattedDate(data.forecast.forecastday[2].date),
-          temp: `${data.forecast.forecastday[2].day.avgtemp_c}°`,
-          text: data.forecast.forecastday[2].day.condition.text,
-          iconUrl: `https:${data.forecast.forecastday[2].day.condition.icon}`
-        },
-        {
-          date: getFormattedDate(data.forecast.forecastday[3].date),
-          temp: `${data.forecast.forecastday[3].day.avgtemp_c}°`,
-          text: data.forecast.forecastday[3].day.condition.text,
-          iconUrl: `https:${data.forecast.forecastday[3].day.condition.icon}`
-        }
-      ]
+    weatherForecast: data.forecast.forecastday.map((dayForecast) => {
+      return {
+        date: getFormattedDate(dayForecast.date),
+        temp: `${dayForecast.day.avgtemp_c}°`,
+        text: dayForecast.day.condition.text,
+        iconUrl: `https:${dayForecast.day.condition.icon}`,
+        hour: dayForecast.hour.map((hourForecast) => {
+          return {
+            time: getFormattedHours(hourForecast.time),
+            temp: `${hourForecast.temp_c}°`,
+            text: hourForecast.condition.text,
+            icon: `https:${hourForecast.condition.icon}`,
+          }
+        })
+      }
+    })
   };
 
   return weatherData;
