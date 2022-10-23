@@ -33,9 +33,13 @@ const Main: React.FC = () => {
   };
 
   const onSuccessGeoposition = async (position: GeolocationPosition) => {
-    getWeatherByCoords(position.coords)
-      .then(result => setWeatherData(result))
-      .catch(error => setError(error));
+    localStorage.defaultCity
+      ? getWeatherByCity(localStorage.defaultCity)
+        .then(result => setWeatherData(result))
+        .catch(error => setError(error))
+      : getWeatherByCoords(position.coords)
+        .then(result => setWeatherData(result))
+        .catch(error => setError(error));
   };
 
   const onErrorGeoposition = async (error: GeolocationPositionError) => {
@@ -61,10 +65,10 @@ const Main: React.FC = () => {
           <StyledButton text="Moscow" onClick={changeCity} />
           <StyledButton text="Bratislava" onClick={changeCity} />
         </div>
-      </>
+      </>;
     }
     return <Loader />;
-  }, [error, weatherData])
+  }, [error, weatherData]);
 
   return (
     <div className="m-auto antialiased font-sans font-serif font-mono text-center">
