@@ -1,5 +1,5 @@
-import { IWeather } from '../../api/weatherApi';
 import { useCallback, useMemo } from 'react';
+import { IWeather } from '../../types/types';
 
 interface IProps {
   weatherData: IWeather,

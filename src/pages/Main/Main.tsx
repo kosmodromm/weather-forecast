@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { getWeatherByCity, getWeatherByCoords, IWeather } from '../../api/weatherApi';
+import { getWeatherByCity, getWeatherByCoords } from '../../api/weatherApi';
 import { getDefaultCity } from '../../utils/getDefaultCity';
 import CityCard from '../../components/CityCard/CityCard';
 import { useNavigate } from 'react-router-dom';
 import Path from '../../constants/Path';
 import StyledButton from '../../components/StyledButton/StyledButton';
 import Loader from '../../components/Loader/Loader';
+import { IWeather } from '../../types/types';
 
 const Main: React.FC = () => {
   const [weatherData, setWeatherData] = useState<IWeather>();
@@ -13,8 +14,12 @@ const Main: React.FC = () => {
   const navigation = useNavigate();
 
   useEffect(() => {
+    initWeatherForecast();
+  }, []);
+
+  const initWeatherForecast = () => {
     try {
-      navigator.geolocation.getCurrentPosition(async position => {
+      navigator.geolocation.getCurrentPosition(async (position) => {
         const data = await getWeatherByCoords(position.coords);
         setWeatherData(data);
       }, async (error) => {
@@ -23,14 +28,14 @@ const Main: React.FC = () => {
         setWeatherData(data);
         console.error(error);
       });
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      throw new Error(error.status);
     } finally {
       if (weatherData) {
         localStorage.setItem('defaultCity', weatherData.city);
       }
     }
-  }, []);
+  };
 
   const changeCity = (city: string): void => {
     localStorage.setItem('defaultCity', city);
