@@ -91,7 +91,7 @@ const CityCard = ({ weatherData, linkTo, hourly, days = 3 }: IProps) => {
           </div>
         </div>
         <div className="m-3">
-          <div className="flex overflow-x-auto max-w-[300px]"
+          <div className="flex overflow-x-auto max-w-[320px]"
           >
             {hourly && hourlyForecast}
           </div>

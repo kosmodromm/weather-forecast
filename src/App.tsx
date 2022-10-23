@@ -1,17 +1,22 @@
 import React from 'react';
 import Main from './pages/Main/Main';
-import { Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import Path from './constants/Path';
 import City from './pages/City/City';
+import Layout from './components/Layout/Layout';
+
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path="/" element={<Layout />}>
+    <Route index element={<Main />} />
+    <Route path={`${Path.City}/:city`} element={<City />} />
+    <Route path={Path.NotAvailablePage} element={<Main />} />
+  </Route>
+));
 
 const App: React.FC = () => {
   return (
     <>
-      <Routes>
-        <Route path={Path.Main} element={<Main />} />
-        <Route path={`${Path.City}/:city`} element={<City />} />
-        <Route path={Path.NotAvailablePage} element={<Main />} />
-      </Routes>
+      <RouterProvider router={router} />
     </>
   );
 };

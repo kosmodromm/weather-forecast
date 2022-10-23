@@ -1,9 +1,8 @@
-import Icon from '../../components/Icon/Icon';
 import React, { useEffect, useState } from 'react';
 import { getWeatherByCity, getWeatherByCoords, IWeather } from '../../api/weatherApi';
 import { getDefaultCity } from '../../utils/getDefaultCity';
 import CityCard from '../../components/CityCard/CityCard';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Path from '../../constants/Path';
 import StyledButton from '../../components/StyledButton/StyledButton';
 import Loader from '../../components/Loader/Loader';
@@ -40,10 +39,7 @@ const Main: React.FC = () => {
 
   return (
     <div className="m-auto antialiased font-sans font-serif font-mono text-center">
-      <main className="bg-paper min-h-screen flex flex-col items-center justify-center text-white text-2xl">
-        <Link to={Path.Main}>
-          <Icon name="logo" className="width-50 height-50 fill-[#FF8F40] pb-5" />
-        </Link>
+      <main className="flex flex-col items-center justify-center text-white text-2xl">
         {
           weatherData
             ? <>
