@@ -27,7 +27,7 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ---
-# App ui
+# App workmap
 
 - main page
     - actual weather & 3-day weather in the default city
