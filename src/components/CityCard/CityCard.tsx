@@ -16,44 +16,52 @@ const CityCard = ({ weatherData, linkTo, hourly, days = 3 }: IProps) => {
   }, [linkTo, weatherData.city]);
 
   const dailyForecast = useMemo(() => {
-    const content = weatherData.weatherForecast.map((day, index) => {
-      if (index <= days && index !== 0) {
-        return <div key={index}
-                    className="flex
+    const content = weatherData.weatherForecast.map(
+      (day, index) => {
+        if (index <= days && index !== 0) {
+          return <div key={index}
+                      className="flex
                     justify-center
                     items-center
                     flex-row
                     border-t
                     text-base
                     p-1"
-        >
-          <p className="p-5 flex-grow">{day.date}</p>
-          <p className="p-2">{day.temp}</p>
-          <img className="rounded-t-lg m-auto pl-2" src={day.iconUrl} alt={day.text} />
-        </div>;
+          >
+            <p className="p-5 flex-grow">{day.date}</p>
+            <p className="p-2">{day.temp}</p>
+            <img
+              className="rounded-t-lg m-auto pl-2"
+              src={day.iconUrl}
+              alt={day.text}
+            />
+          </div>;
+        }
       }
-    });
+    );
     return content;
-  }, [weatherData]);
+  }, [weatherData, days]);
 
   const hourlyForecast = useMemo(() => {
-    const content = weatherData.weatherForecast[0].hour.map((hour, index) => {
-      return <div key={index}
-                  className="flex
+    const content = weatherData.weatherForecast[0].hour.map(
+      (hour, index) => {
+        return <div key={index}
+                    className="flex
                   flex-col
                   justify-center
                   text-sm
                   p-3
                   border-r
                   last:border-none"
-      >
-        <div className="pb-2">{hour.time}</div>
-        <div className="flex justify-center items-center pr-2 pl-2">
-          <p className="text-sm">{hour.temp}</p>
-          <img src={hour.icon} alt={hour.text} className="pl-1" />
-        </div>
-      </div>;
-    });
+        >
+          <div className="pb-2">{hour.time}</div>
+          <div className="flex justify-center items-center pr-2 pl-2">
+            <p className="text-sm">{hour.temp}</p>
+            <img src={hour.icon} alt={hour.text} className="pl-1" />
+          </div>
+        </div>;
+      }
+    );
     return content;
   }, [weatherData]);
 
@@ -91,7 +99,7 @@ const CityCard = ({ weatherData, linkTo, hourly, days = 3 }: IProps) => {
           </div>
         </div>
         <div className="m-3">
-          <div className="flex overflow-x-auto max-w-[320px]"
+          <div className="flex overflow-x-auto max-w-full"
           >
             {hourly && hourlyForecast}
           </div>

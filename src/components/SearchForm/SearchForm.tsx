@@ -17,7 +17,7 @@ const SearchForm: React.FC = () => {
   };
 
   return (
-    <form className="flex items-center pb-5 min-w-[340px]" onSubmit={onSearch}>
+    <form className="flex items-center pb-5 min-w-[380px]" onSubmit={onSearch}>
       <label htmlFor="simple-search" className="sr-only">Search</label>
       <div className="relative w-full">
         <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
