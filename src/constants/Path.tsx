@@ -1,7 +1,5 @@
 const Path = {
-  NotFound: "/404",
-  DontHavePermissions: "/403",
-  NotAvailablePage: "/*",
+  UnknownPage: "/*",
   Main: "/",
   City: "/in"
 };

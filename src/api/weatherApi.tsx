@@ -9,9 +9,10 @@ const API_URL = new URL('http://api.weatherapi.com/v1/forecast.json?');
 
 export async function getWeatherByCoords(coords: ICoords): Promise<IWeather> {
   let weatherData: IWeatherDTO;
+  const params = `key=${API_KEY}&q=${coords.latitude},${coords.longitude}&days=${DAYS}&aqi=no&alerts=no`;
 
   try {
-    const response = await fetch(API_URL + `key=${API_KEY}&q=${coords.latitude},${coords.longitude}&days=${DAYS}&aqi=no&alerts=no`);
+    const response = await fetch(API_URL + params);
     if (!response.ok) {
       throw await response.json();
     }
@@ -24,9 +25,10 @@ export async function getWeatherByCoords(coords: ICoords): Promise<IWeather> {
 
 export async function getWeatherByCity(city: string): Promise<IWeather> {
   let weatherData: IWeatherDTO;
+  const params = `key=${API_KEY}&q=${city.toLowerCase()}&days=${DAYS}&aqi=no&alerts=no`;
 
   try {
-    const response = await fetch(API_URL + `key=${API_KEY}&q=${city.toLowerCase()}&days=${DAYS}&aqi=no&alerts=no`);
+    const response = await fetch(API_URL + params);
     if (!response.ok) {
       throw await response.json();
     }
@@ -54,10 +56,10 @@ function fromDTO(data: IWeatherDTO): IWeather {
             time: getFormattedHours(hourForecast.time),
             temp: `${hourForecast.temp_c}°`,
             text: hourForecast.condition.text,
-            icon: `https:${hourForecast.condition.icon}`,
-          }
+            icon: `https:${hourForecast.condition.icon}`
+          };
         })
-      }
+      };
     })
   };
 

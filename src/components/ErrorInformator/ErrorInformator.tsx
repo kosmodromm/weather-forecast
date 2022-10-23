@@ -5,7 +5,7 @@ interface IProps {
 const ErrorInformator: React.FC<IProps> = ({error}) => {
   return (
     <div>
-      <p className="text-gray-800 pt-10">
+      <p className="text-gray-800 pt-10 text-xl">
         {error}
       </p>
     </div>

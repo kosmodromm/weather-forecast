@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import { IWeather, WeatherErrors } from '../../types/types';
+import ErrorInformator from '../../components/ErrorInformator/ErrorInformator';
 
 const City: React.FC = () => {
   const DAYS = 10;
@@ -46,9 +47,11 @@ const City: React.FC = () => {
 
   const content = useMemo(() => {
     if (error) {
-      return <div>{error.error.message}</div>;
+      return <ErrorInformator error={error.error.message}/>;
     } else if (weatherData) {
-      return <CityCard weatherData={weatherData} linkTo={handleSearch} days={DAYS} hourly />;
+      return <CityCard
+              weatherData={weatherData} linkTo={handleSearch} days={DAYS} hourly
+            />;
     }
     return <Loader />;
   }, [error, weatherData]);

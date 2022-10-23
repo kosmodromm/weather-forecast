@@ -79,5 +79,5 @@ export interface WeatherErrors {
   error: {
     code: number,
     message: string
-  }
+  };
 }

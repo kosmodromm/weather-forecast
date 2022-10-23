@@ -7,6 +7,7 @@ import Path from '../../constants/Path';
 import StyledButton from '../../components/StyledButton/StyledButton';
 import Loader from '../../components/Loader/Loader';
 import { IWeather, WeatherErrors } from '../../types/types';
+import ErrorInformator from '../../components/ErrorInformator/ErrorInformator';
 
 const Main: React.FC = () => {
   const [weatherData, setWeatherData] = useState<IWeather>();
@@ -56,7 +57,7 @@ const Main: React.FC = () => {
 
   const content = useMemo(() => {
     if (error) {
-      return <div>{error.error.message}</div>;
+      return <ErrorInformator error={error.error.message}/>;
     } else if (weatherData) {
       return <>
         <CityCard weatherData={weatherData} linkTo={changeCity} />

@@ -9,7 +9,7 @@ const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />}>
     <Route index element={<Main />} />
     <Route path={`${Path.City}/:city`} element={<City />} />
-    <Route path={Path.NotAvailablePage} element={<Main />} />
+    <Route path={Path.UnknownPage} element={<Main />} />
   </Route>
 ));
 
