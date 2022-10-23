@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getDefaultCity } from '../../utils/getDefaultCity';
-import Form from '../../components/Form/Form';
 import { getWeatherByCity, IWeather } from '../../api/weatherApi';
 import CityCard from '../../components/CityCard/CityCard';
 import { useParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
+import SearchForm from '../../components/SearchForm/SearchForm';
 
 const City: React.FC = () => {
   const DAYS = 10;
@@ -34,7 +34,7 @@ const City: React.FC = () => {
   return (
     <div className="m-auto antialiased font-sans font-serif font-mono text-center">
       <main className="flex flex-col items-center justify-center text-white text-2xl">
-        <Form />
+        <SearchForm />
         {
           weatherData
             ? <>

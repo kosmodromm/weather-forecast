@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Path from '../../constants/Path';
 
-const Form: React.FC = () => {
+const SearchForm: React.FC = () => {
   const [city, setCity] = useState('');
 
   const navigate = useNavigate();
@@ -47,4 +47,4 @@ const Form: React.FC = () => {
   );
 };
 
-export default Form;
+export default SearchForm;
